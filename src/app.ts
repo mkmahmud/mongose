@@ -3,13 +3,17 @@ import express from 'express';
 import cors from 'cors';
 
 const app = express();
-const router = express.Router()
 app.use(cors());
-app.use(router);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-router.get('/', function (req, res) {
-    res.send("All  operational")
-})
+// Routes
+import BooksRoute from "./app/modules/Books/books.route";
+
+
+app.use('/server', BooksRoute)
+
+
 
 
 export default app
