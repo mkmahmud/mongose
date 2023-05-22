@@ -1,4 +1,4 @@
-import { Model, Schema, model } from "mongoose";
+import mongoose, { Model, Schema, model } from "mongoose";
 import { Books } from "./books.interface";
 
 const booksSchema = new Schema<Books>({
@@ -59,8 +59,21 @@ const booksSchema = new Schema<Books>({
     ]
 })
 
+const bookSchema = new mongoose.Schema({
+    
+    rating: { type: Number, required: true }
+    
+});
+
+
 // Creating Modal 
 
-const BooksModal = model<Books>('Books', booksSchema)
+export const BooksModal = model<Books>('Books', booksSchema)
 
-export default BooksModal
+
+
+// Create the Book model
+export const Book = mongoose.model('Book', bookSchema);
+
+
+

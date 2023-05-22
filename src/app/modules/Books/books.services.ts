@@ -1,5 +1,5 @@
 import { Books } from "./books.interface";
-import BooksModal from "./books.model";
+import {Book, BooksModal} from "./books.model";
 
 
 export const addNewBook = async (payload: Books): Promise<Books> => {
@@ -22,3 +22,19 @@ export const getSciFiBooks = async () => {
 
     return fantasybook
 } 
+
+
+export const retrieveFeaturedBooks = () => {
+    return Book.find({ rating: { $gte: 4 } })
+      .then(books => {
+        const featuredBooks = books.map(book => {
+          const featured = book.rating > 4.5 ? 'BestSeller' : 'Popular';
+          return { ...book._doc, featured };
+        });
+        return featuredBooks;
+      })
+      .catch(error => {
+        throw error;
+      });
+  };
+  
