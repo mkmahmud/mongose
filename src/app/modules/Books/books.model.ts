@@ -1,4 +1,4 @@
-import mongoose, { Model, Schema, model } from "mongoose";
+import mongoose, { Model, Schema, model, mongo } from "mongoose";
 import { Books } from "./books.interface";
 
 const booksSchema = new Schema<Books>({
@@ -60,9 +60,15 @@ const booksSchema = new Schema<Books>({
 })
 
 const bookSchema = new mongoose.Schema({
-    
+
     rating: { type: Number, required: true }
-    
+
+});
+
+const UpdateBookSchema = new mongoose.Schema({
+    year: Number,
+    rating: Number,
+    price: String
 });
 
 
@@ -77,3 +83,5 @@ export const Book = mongoose.model('Book', bookSchema);
 
 
 
+// export const updateBook = mongoose.model('UpdateBook', updateBookSchema);
+export const UpdateBooks = mongoose.model('updateBooks', UpdateBookSchema)
